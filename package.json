@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "simplewebrtc": "^3.0.2"
+  }
+}

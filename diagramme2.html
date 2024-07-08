@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Diagramme de Performance</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Heebo', sans-serif;
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .chart-container {
+            width: 80%;
+            max-width: 300px; /* Largeur maximale réduite pour un graphique plus petit */
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+            font-size: 20px; /* Taille de la police du titre réduite */
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="chart-container">
+        <h1>Diagramme de Performance</h1>
+        <canvas id="performanceChart"></canvas>
+    </div>
+
+    <!-- Chart.js Library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const ctx = document.getElementById('performanceChart').getContext('2d');
+        const performanceChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Nettoyage', 'Blanchiment', 'Orthodontie', 'Implants', 'Extraction', 'Prothèses'],
+                datasets: [{
+                    label: 'Nombre de patients',
+                    data: [20, 50, 80, 0, 90, 10],
+                    backgroundColor: [
+                        '#4CAF50', // Dark Green
+                        '#F44336', // Dark Red
+                        '#2196F3', // Dark Blue
+                        '#FF9800', // Dark Orange
+                        '#9C27B0', // Dark Purple
+                        '#FFEB3B'  // Dark Yellow
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 20
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                responsive: true,
+                maintainAspectRatio: false,
+                aspectRatio: 0.8 // Aspect ratio personnalisé pour une meilleure vue d'ensemble
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulaire Nouveau Patient</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <h1 class="mb-4 text-center text-primary"><strong>Nouveau Patient</strong></h1>
+    <form id="patientForm">
+        <div>
+            <label for="name">Nom:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div>
+            <label for="age">Âge:</label>
+            <input type="number" id="age" name="age" required>
+        </div>
+        <div>
+            <label for="gender">Sexe:</label>
+            <select id="gender" name="gender" required>
+                <option value="male">Masculin</option>
+                <option value="female">Féminin</option>
+                <option value="other">Autre</option>
+            </select>
+        </div>
+        <button type="button" onclick="generatePDF()">Télécharger PDF</button>
+    </form>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const { jsPDF } = window.jspdf;
+
+            window.generatePDF = function() {
+                const name = document.getElementById('name').value;
+                const age = document.getElementById('age').value;
+                const gender = document.getElementById('gender').value;
+
+                if (!name || !age || !gender) {
+                    alert('Veuillez remplir tous les champs du formulaire.');
+                    return;
+                }
+
+                const doc = new jsPDF();
+
+                doc.text(20, 20, 'Nouveau Patient');
+                doc.text(20, 30, `Nom: ${name}`);
+                doc.text(20, 40, `Âge: ${age}`);
+                doc.text(20, 50, `Sexe: ${gender}`);
+
+                doc.save('Nouveau_Patient.pdf');
+            };
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche Patient</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            background-color: #f0f2f5;
+            font-family: 'Arial', sans-serif;
+        }
+        .card-custom {
+            border: none;
+            border-radius: 12px;
+            padding: 30px;
+            background-color: #ffffff;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .card-header-custom {
+            background-color: #004085;
+            border-radius: 12px 12px 0 0;
+            padding: 20px;
+            color: white;
+            text-align: center;
+        }
+        .header-icon {
+            margin-right: 10px;
+        }
+        .hospital-info-container {
+            border: 2px solid #004085;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            background-color: #e9ecef;
+        }
+        .hospital-logo {
+            max-width: 80px;
+        }
+        .form-label-custom {
+            font-weight: bold;
+            color: #004085;
+        }
+        .required {
+            color: red;
+        }
+        .form-control-custom {
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ced4da;
+        }
+        .table-container {
+            margin-top: 20px;
+            overflow-x: auto;
+        }
+        .table-bordered {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .table thead th {
+            background-color: #004085;
+            color: white;
+            text-align: center;
+        }
+        .table tbody td {
+            text-align: center;
+            vertical-align: middle;
+        }
+        .table tbody tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        @media (max-width: 768px) {
+            .table thead {
+                display: none;
+            }
+            .table tbody tr {
+                display: block;
+                margin-bottom: 15px;
+            }
+            .table tbody td {
+                display: block;
+                text-align: right;
+                font-size: 13px;
+                border-top: 1px solid #dee2e6;
+                position: relative;
+                padding-left: 50%;
+            }
+            .table tbody td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 10px;
+                width: calc(50% - 20px);
+                text-align: left;
+                font-weight: bold;
+                white-space: nowrap;
+            }
+        }
+        .btn-custom {
+            background-color: #004085;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            padding: 10px 20px;
+            transition: background-color 0.3s ease;
+        }
+        .btn-custom:hover {
+            background-color: #002a5a;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid py-5">
+        <div class="container py-5 d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+            <div class="col-md-12 col-lg-8">
+                <div class="card card-custom">
+                    <div class="hospital-info-container d-flex justify-content-between align-items-center">
+                        <img src="img/arriereplan.png" alt="Logo de l'hôpital" class="hospital-logo">
+                        <div class="hospital-info text-right">
+                            <p><strong>CENTRE HOSPITALIER NATIONAL</strong></p>
+                            <h2><strong>DALAL JAM</strong></h2>
+                            <p>Ancien Parcours de golf Guediawaye</p>
+                            <p>golf-sud - BP :19001 Guediawaye - Dakar</p>
+                            <p>Tél : +221 33 837 56 57 - Fax : 33 837 56 58</p>
+                            <p>Division de la Sante Bucco Dentaire</p>
+                        </div>
+                    </div>
+                    <div class="card-header-custom">
+                        <h1><i class="fas fa-user-plus header-icon"></i> DOSSIER DU PATIENT</h1>
+                    </div>
+                    <form action="#">
+                        <div class="row g-4">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-label form-label-custom"><strong>Service<sup class="required">*</sup></strong></label>
+                                    <select class="form-control form-control-custom" name="service">
+                                        <option value="Orthodontie">Orthodontie</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label form-label-custom"><strong>Prénom<sup class="required">*</sup></strong></label>
+                                    <input type="text" class="form-control form-control-custom" >
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label form-label-custom"><strong>Nom<sup class="required">*</sup></strong></label>
+                                    <input type="text" class="form-control form-control-custom" >
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-label form-label-custom"><strong>Sexe<sup class="required">*</sup></strong></label>
+                                    <div class="d-flex align-items-center">
+                                        <div class="form-check me-5">
+                                            <input class="form-check-input" type="radio" id="homme" name="sexe" value="homme">
+                                            <label class="form-check-label" for="homme">Homme</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" id="femme" name="sexe" value="femme">
+                                            <label class="form-check-label" for="femme">Femme</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-label form-label-custom"><strong>Âge<sup class="required">*</sup></strong></label>
+                                    <input type="number" class="form-control form-control-custom" >
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-label form-label-custom"><strong>Téléphone<sup class="required">*</sup></strong></label>
+                                    <input type="tel" class="form-control form-control-custom" >
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label form-label-custom"><strong>Adresse<sup class="required">*</sup></strong></label>
+                                    <input type="text" class="form-control form-control-custom" >
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label form-label-custom"><strong>Identifiant<sup class="required">*</sup></strong></label>
+                                    <input type="text" class="form-control form-control-custom" >
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label form-label-custom"><strong>Profession<sup class="required">*</sup></strong></label>
+                                    <input type="text" class="form-control form-control-custom" >
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label form-label-custom"><strong>Dentiste traitant<sup class="required">*</sup></strong></label>
+                                    <select class="form-control form-control-custom">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label form-label-custom"><strong>Date de consultation</strong></label>
+                                    <input type="date" class="form-control form-control-custom">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label form-label-custom"><strong>Mode de paiement</strong></label>
+                                    <select class="form-control form-control-custom">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-label form-label-custom"><strong>Motif de consultation</strong></label>
+                                    <textarea class="form-control form-control-custom" rows="3"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="table-container">
+                                    <h4 class="mb-3"><strong>Prochains Rendez-vous</strong></h4>
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Date</th>
+                                                <th>Nom Dentiste</th>
+                                                <th>Traitement</th>
+                                                <th>Cloture</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td data-label="Date">2024-07-10</td>
+                                                <td data-label="Nom Dentiste">Dr. John Doe</td>
+                                                <td data-label="Traitement">Consultation</td>
+                                                <td data-label="Cloture">Non</td>
+                                            </tr>
+                                            <tr>
+                                                <td data-label="Date">2024-07-24</td>
+                                                <td data-label="Nom Dentiste">Dr. John Doe</td>
+                                                <td data-label="Traitement">Suivi</td>
+                                                <td data-label="Cloture">Non</td>
+                                            </tr>
+                                            <tr>
+                                                <td data-label="Date">2024-08-07</td>
+                                                <td data-label="Nom Dentiste">Dr. John Doe</td>
+                                                <td data-label="Traitement">Suivi</td>
+                                                <td data-label="Cloture">Non</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-md-12 text-center mt-4">
+                                <button type="submit" class="btn btn-custom btn-lg"><i class="fas fa-save"></i> Enregistrer</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

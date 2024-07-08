@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facture Cabinet Dentaire</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .invoice-form {
+            width: 100%;
+            max-width: 600px;
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            position: relative; /* For logo positioning */
+        }
+        .invoice-form h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        .form-group select {
+            width: 100%;
+        }
+        .form-group .row {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 8px;
+        }
+        .form-group .row .col {
+            flex: 1;
+            margin-right: 10px;
+        }
+        .form-group .row .col:last-child {
+            margin-right: 0;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .submit-btn:hover {
+            background-color: #45a049;
+        }
+        .logo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 120px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+
+<div class="invoice-form">
+    <img class="logo" src="path/to/your/logo.png" alt="Logo Cabinet Dentaire">
+    <h2>Facture Cabinet Dentaire</h2>
+    <form>
+        
+        <div class="form-group">
+            <label for="date">Date</label>
+            <input type="date" id="date" name="date">
+        </div>
+        <div class="form-group">
+            <label for="patient-name">Nom du Patient</label>
+            <input type="text" id="patient-name" name="patient-name">
+        </div>
+        <div class="form-group">
+            <label for="patient-number">Numéro</label>
+            <input type="text" id="patient-number" name="patient-number" pattern="[0-9]+" title="Entrez uniquement des chiffres">
+        </div>
+        <div class="form-group">
+            <label for="patient-dob">Date de Naissance</label>
+            <input type="date" id="patient-dob" name="patient-dob">
+        </div>
+        
+        <div class="form-group">
+            <label for="service">Service</label>
+            <select id="service" name="service">
+                <option value="plomb">Plomb</option>
+                <option value="detartrage">Détartrage</option>
+                <option value="blanchiment">Blanchiment</option>
+                <option value="extraction">Extraction</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="quantity">Quantité</label>
+            <select id="quantity" name="quantity">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="prise_en_charge">Prise en charge</option>
+            </select>
+        </div>
+        <div class="form-group row">
+            <div class="col">
+                <label for="unit-price">Prix Unitaire (fr CFA)</label>
+                <input type="number" id="unit-price" name="unit-price" step="0.01">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="total">Total (fr CFA)</label>
+            <input type="number" id="total" name="total" step="0.01" readonly>
+        </div>
+        <button type="submit" class="submit-btn">Soumettre</button>
+    </form>
+</div>
+
+<script>
+    document.getElementById('quantity').addEventListener('change', calculateTotal);
+    document.getElementById('unit-price').addEventListener('input', calculateTotal);
+
+    function calculateTotal() {
+        const quantity = document.getElementById('quantity').value;
+        const unitPrice = parseFloat(document.getElementById('unit-price').value) || 0;
+
+        let total = 0;
+        if (quantity === 'prise_en_charge') {
+            total = 0; // Traitement gratuit pour prise en charge
+        } else {
+            total = parseInt(quantity) * unitPrice;
+        }
+
+        document.getElementById('total').value = total.toFixed(2);
+    }
+</script>
+
+</body>
+</html>

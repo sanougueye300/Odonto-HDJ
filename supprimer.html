@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recherche de référence</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px;
+            background: linear-gradient(to bottom, #ffffff, #f0f0f0);
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            margin-right: 10px;
+            color: #555;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 200px;
+            margin-right: 10px;
+            transition: border-color 0.3s ease;
+            outline: none;
+        }
+
+        input[type="text"]:focus {
+            border-color: #4CAF50;
+        }
+
+        button {
+            padding: 12px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #results {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table th, table td {
+            padding: 12px 8px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        table th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        table tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        @media (max-width: 600px) {
+            input[type="text"] {
+                width: 100%;
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Recherche de référence</h1>
+        <form id="searchForm" onsubmit="return false;">
+            <label for="referenceInput">Entrez la référence :</label>
+            <input type="text" id="referenceInput" name="reference" required>
+            <button onclick="chercherReference()">Rechercher</button>
+        </form>
+        <div id="results"></div>
+    </div>
+
+    <script>
+        function chercherReference() {
+            var reference = document.getElementById('referenceInput').value.trim();
+            var donnees = {
+                "ref1": [ { "x": 1, "y": 2 }, { "x": 3, "y": 4 } ],
+                "ref2": [ { "x": 5, "y": 6 }, { "x": 7, "y": 8 } ]
+                // Ajoutez plus de données au besoin
+            };
+
+            var resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = '';
+
+            if (reference in donnees) {
+                var table = document.createElement('table');
+                var thead = document.createElement('thead');
+                var tbody = document.createElement('tbody');
+
+                var headRow = document.createElement('tr');
+                var headers = ['Référence', 'X', 'Y'];
+
+                headers.forEach(function(headerText) {
+                    var th = document.createElement('th');
+                    th.appendChild(document.createTextNode(headerText));
+                    headRow.appendChild(th);
+                });
+
+                thead.appendChild(headRow);
+                table.appendChild(thead);
+
+                donnees[reference].forEach(function(coordinate, index) {
+                    var row = document.createElement('tr');
+                    row.className = index % 2 === 0 ? 'even' : 'odd'; // Alternance de couleur des lignes
+
+                    var rowData = [reference, coordinate.x, coordinate.y];
+
+                    rowData.forEach(function(cellData) {
+                        var td = document.createElement('td');
+                        td.appendChild(document.createTextNode(cellData));
+                        row.appendChild(td);
+                    });
+
+                    tbody.appendChild(row);
+                });
+
+                table.appendChild(tbody);
+                resultsDiv.appendChild(table);
+            } else {
+                resultsDiv.innerHTML = '<p style="color: #f44336;">Référence non trouvée : ' + reference + '</p>';
+            }
+        }
+    </script>
+</body>
+</html>
